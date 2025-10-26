@@ -1,0 +1,237 @@
+/* === General Layout === */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  background: #f8f9fa;
+  color: #222;
+}
+
+/* === Sidebar === */
+.sidebar {
+  width: 240px;
+  background-color: #1a1a1a;
+  color: white;
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+}
+
+.sidebar h2 {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.sidebar a {
+  display: block;
+  color: #ddd;
+  text-decoration: none;
+  padding: 10px 0;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #fff;
+  transform: translateX(5px);
+}
+
+/* === Main Content === */
+
+.main {
+  margin-left: 260px;
+  padding: 20px 40px;
+  width: 100%;
+}
+
+
+/* === Hero Section === */
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+  border-radius: 20px;
+  margin-bottom: 50px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.current-read {
+  background: rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  padding: 8px 15px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* === Book Grid Container === */
+/* === Book Grid Container === */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 40px;
+  margin: 0 auto;
+  max-width: 1400px; /* ensures space utilization on wide screens */
+  background-color: #f7f8fa;
+  box-sizing: border-box;
+}
+
+/* Responsive grid (for larger & smaller screens) */
+@media (min-width: 1200px) {
+  .book-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 per row on big screens */
+  }
+}
+@media (max-width: 768px) {
+  .book-grid {
+    grid-template-columns: 1fr; /* 1 per row on mobile */
+  }
+}
+/* === Book Card Styling === */
+.book-card {
+  position: relative; /* important for overlay positioning */
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  height: 360px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); /* stronger shadow on hover */
+}
+
+/* Hover Zoom Effect on Image */
+.book-card:hover img {
+  transform: scale(1.1);
+}
+
+/* Book Info Overlay */
+.book-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.75); /* semi-transparent dark overlay */
+  color: white;
+  padding: 20px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-sizing: border-box;
+  pointer-events: none; /* ensures smooth hover effect */
+}
+
+/* Show info on hover */
+.book-card:hover .book-info {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Text Styling inside overlay */
+.book-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 5px 0;
+  color: #fff;
+}
+
+.book-author {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #ddd;
+}
+
+.stars {
+  margin: 0 auto 8px;
+  width: 90px;
+  height: 18px;
+  background: linear-gradient(90deg, #ffc107 var(--rating), #e0e0e0 var(--rating));
+  -webkit-mask: url("https://upload.wikimedia.org/wikipedia/commons/1/18/Five-pointed_star.svg") repeat-x;
+  -webkit-mask-size: 18px 18px;
+  mask: url("https://upload.wikimedia.org/wikipedia/commons/1/18/Five-pointed_star.svg") repeat-x;
+  mask-size: 18px 18px;
+}
+
+.genre-tag {
+  display: inline-block;
+  background-color: #4f46e5;
+  color: #fff;
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+
+/* Recommended Reads Section */
+.recommended-reads {
+  margin: 50px 0;
+}
+
+.recommended-reads h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+.recommended-wrapper {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 20px;
+}
+
+.recommended-carousel {
+  display: flex;
+  gap: 30px;
+}
+
+.recommended-carousel .book-card {
+  flex: 0 0 calc(33.333% - 20px);
+  scroll-snap-align: start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recommended-carousel .book-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .recommended-carousel .book-card {
+    flex: 0 0 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .recommended-carousel .book-card {
+    flex: 0 0 80%;
+  }
+}
+
+/* Keep the same .book-card, .book-info, .stars styling from main grid */
